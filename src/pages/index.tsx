@@ -1,20 +1,15 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Timeline from "../components/timeline";
 import Navigation from "../components/navigation";
 import SidePanel from "../components/sidePanel";
-import LoginBanner from "../components/loginBanner";
+import SignIn from "../components/signIn";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
   if (!session) {
-    return (
-      <>
-        <h1>Home</h1>
-        <button onClick={() => signIn()}>Sign in</button>
-      </>
-    );
+    return <SignIn />;
   }
   return (
     <>
@@ -31,7 +26,6 @@ const Home: NextPage = () => {
         <Timeline classNames="pt-4 col-span-4 sm:col-span-2" />
         <SidePanel classNames="pt-6 hidden col-span-0 sm:col-span-1 sm:flex" />
       </div>
-      {!session && <LoginBanner />}
     </>
   );
 };

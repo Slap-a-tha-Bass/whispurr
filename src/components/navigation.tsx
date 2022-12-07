@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import HomeIcon from "../icons/home";
 import UserIcon from "../icons/user";
+import LogoutIcon from "../icons/logout";
+
 export default function Navigation({ classNames }: { classNames?: string }) {
   const { data: session } = useSession();
 
@@ -34,6 +36,16 @@ export default function Navigation({ classNames }: { classNames?: string }) {
           >
             <UserIcon /> Profile
           </Link>
+          <button
+            className="mt-2 flex max-w-max items-center rounded-full py-2 px-4 text-xl hover:bg-gray-700"
+            onClick={() => {
+              if (confirm("Are you sure you want to sign out?")) {
+                signOut();
+              }
+            }}
+          >
+            <LogoutIcon /> Sign Out
+          </button>
         </section>
       )}
     </main>

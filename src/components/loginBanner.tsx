@@ -2,10 +2,16 @@ import { signIn } from "next-auth/react";
 
 export default function LoginBanner() {
   return (
-    <div className="fixed bottom-0 w-full h-16 grid grid-cols-3 items-center bg-primary text-black px-8">
-      <p>{"Don't miss out on the secrets!"}</p>
-      <p className="font-bold text-xl font-logo text-center">Whispurr</p>
-      <button className="font-bold hover:underline text-right" onClick={() => signIn()}>Login</button>
+    <div className="fixed bottom-0 h-16 w-full bg-primary px-4 text-black">
+      <div className="flex h-full items-center justify-between sm:justify-around">
+        <p className="text-sm sm:text-lg font-logo">{"Don't miss out on the secrets!"}</p>
+        <button
+          className="text-right font-bold hover:underline"
+          onClick={() => signIn()}
+        >
+          Sign In
+        </button>
+      </div>
     </div>
   );
 }

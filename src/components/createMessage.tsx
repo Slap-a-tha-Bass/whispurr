@@ -41,17 +41,24 @@ export default function CreateMessage() {
         onSubmit={handleSubmit}
       >
         <textarea
-          className="w-full rounded-lg bg-transparent p-4 font-logo text-lg focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+          className={`w-full rounded-lg bg-transparent p-4 font-logo text-lg focus:border-transparent focus:outline-none focus:ring-2 ${
+            disabled ? "ring-gray-500" : "ring-primary"
+          }`}
           onChange={(e) => setText(e.target.value)}
           placeholder="Secrets make friends..."
         />
         <div className="mx-auto">
           <button
             className={`my-4 w-32 rounded-lg py-2 px-4 font-logo font-bold text-black ${
-              disabled ? "bg-gray-700" : "bg-primary"
+              disabled ? "bg-gray-500" : "bg-primary"
             }`}
             type="submit"
             disabled={disabled}
+            onClick={() => {
+              if (disabled) {
+                alert("Message must be between 5 and 250 characters.");
+              }
+            }}
           >
             Whispurr
           </button>
