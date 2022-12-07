@@ -12,9 +12,11 @@ const LIMIT = 10;
 export default function Timeline({
   classNames,
   where = {},
+  hideCreateMessage,
 }: {
   classNames?: string;
   where?: RouterInputs["message"]["timeline"]["where"];
+  hideCreateMessage?: boolean;
 }) {
   const { data, hasNextPage, fetchNextPage, isFetching } =
     trpc.message.timeline.useInfiniteQuery(
@@ -38,7 +40,7 @@ export default function Timeline({
   const client = useQueryClient();
   return (
     <main className={`flex flex-col items-center justify-center ${classNames}`}>
-      <CreateMessage />
+      {!hideCreateMessage && <CreateMessage />}
       {messages.map(
         (
           message: Message & {

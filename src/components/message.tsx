@@ -8,6 +8,7 @@ import ThumbsUp from "../icons/thumbs-up";
 import ThumbsUpFilled from "../icons/thumbs-up-filled";
 import type { InfiniteData, QueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import ForwardIcon from "../icons/forward";
 dayjs.extend(relativeTime);
 dayjs.extend(updateLocale);
 dayjs.updateLocale("en", {
@@ -117,7 +118,7 @@ export default function WhispurrMessage({
   return (
     <div className="mb-2 w-full border-b border-primary">
       <Link href={`/${message.author.name || null}`}>
-        <div className="flex p-4">
+        <div className="flex p-1 sm:p-4">
           {author.image && (
             <Image
               src={author.image}
@@ -127,7 +128,7 @@ export default function WhispurrMessage({
               className="rounded-full ring-2 ring-primary"
             />
           )}
-          <div className="ml-4 ">
+          <div className="ml-4">
             <div className="flex items-center">
               <p className="text-bold">{author.name} </p>
               <p className="ml-2 text-xs text-gray-300">
@@ -138,9 +139,11 @@ export default function WhispurrMessage({
         </div>
       </Link>
 
-      <p className="ml-8 mb-1 font-logo">{message.text}</p>
+      <p className="ml-2 mt-4 sm:ml-8 sm:mt-4 flex items-start font-logo">
+        <ForwardIcon /> {message.text}
+      </p>
 
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end px-8 py-2">
         <button
           onClick={() => {
             if (message.likes.length > 0) {
