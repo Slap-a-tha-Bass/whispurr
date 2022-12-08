@@ -25,7 +25,7 @@ export default function SignIn() {
           />
         </div>
         <p className="text-xl sm:text-2xl">Secrets Make Friends</p>
-        <CatLottie />
+        <CatLottie classNames="sm:h-72 sm:w-72" />
       </div>
       <LoginBanner />
     </>

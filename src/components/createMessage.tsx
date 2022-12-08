@@ -40,9 +40,10 @@ export default function CreateMessage() {
         className="flex w-full flex-col justify-center p-4"
         onSubmit={handleSubmit}
       >
+        <label className="text-xs text-gray-500">{disabled ? "Must have at least 5 characters" : ""}</label>
         <textarea
           className={`w-full rounded-lg bg-transparent p-4 font-logo text-lg focus:border-transparent focus:outline-none focus:ring-2 ${
-            disabled ? "ring-gray-500" : "ring-primary"
+            disabled ? "ring-gray-400" : "ring-primary"
           }`}
           onChange={(e) => setText(e.target.value)}
           placeholder="Secrets make friends..."
@@ -50,7 +51,7 @@ export default function CreateMessage() {
         <div className="mx-auto">
           <button
             className={`my-4 w-32 rounded-lg py-2 px-4 font-logo font-bold text-black ${
-              disabled ? "bg-gray-500" : "bg-primary"
+              disabled ? "bg-gray-400" : "bg-primary"
             }`}
             type="submit"
             disabled={disabled}

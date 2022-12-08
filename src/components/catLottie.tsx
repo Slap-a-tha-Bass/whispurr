@@ -1,7 +1,7 @@
 import { useLottie } from "lottie-react";
 import catAnimation from "../icons/whiskers.json";
 
-export default function CatLottie() {
+export default function CatLottie({ classNames }: { classNames?: string }) {
   const options = {
     animationData: catAnimation,
     loop: true,
@@ -9,5 +9,5 @@ export default function CatLottie() {
 
   const { View } = useLottie(options);
 
-  return <div className="h-64 w-64 sm:h-72 sm:w-72 mx-auto py-8">{View}</div>;
+  return <div className={`mx-auto h-64 w-64 py-8 ${classNames}`}>{View}</div>;
 }

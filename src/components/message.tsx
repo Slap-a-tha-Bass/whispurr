@@ -139,9 +139,12 @@ export default function WhispurrMessage({
         </div>
       </Link>
 
-      <p className="ml-2 mt-4 sm:ml-8 sm:mt-4 flex items-start font-logo">
-        <ForwardIcon /> {message.text}
-      </p>
+      <div className="mt-4 grid grid-cols-10">
+        <div className="col-span-1">
+          <ForwardIcon classNames="mt-1 ml-2" />
+        </div>
+        <p className="col-span-9 font-logo">{message.text}</p>
+      </div>
 
       <div className="flex items-center justify-end px-8 py-2">
         <button
