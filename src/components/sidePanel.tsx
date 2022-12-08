@@ -1,26 +1,18 @@
-import { useEffect, useState } from "react";
-import { clientEnv } from "../env/schema.mjs";
 import NewsIcon from "../icons/news";
 import ArticleCard from "./articleCard";
 import CatLottie from "./catLottie";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function SidePanel({ classNames }: { classNames?: string }) {
-  const [articles, setArticles] = useState<IArticle[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${clientEnv.NEXT_PUBLIC_NEWS_API}`
-      );
-      const data = await res.json();
-      if (data.status === "ok") {
-        setArticles(data.articles);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  const { data, error } = useSWR("/api/articleData", fetcher);
+  let newsData: { articles: IArticle[] } = { articles: [] };
+  if (data) {
+    newsData = JSON.parse(data);
+  }
+  const loading = !data && !error;
+  if (error) return <div>Failed to load</div>;
   if (loading) {
     return (
       <div className="h-96 w-full">
@@ -38,9 +30,11 @@ export default function SidePanel({ classNames }: { classNames?: string }) {
           </p>
         </div>
         <div>
-          {articles.map((article, index) => (
-            <ArticleCard key={index} article={article} />
-          ))}
+          {newsData.articles?.map(
+            (article: IArticle, index: number | undefined) => (
+              <ArticleCard key={index} article={article} />
+            )
+          )}
         </div>
       </section>
     </main>
